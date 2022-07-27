@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    
+    #game {
+        width: 400px;
+        height: 500px;
+        border: 1px solid black;
+        background-image: url('background2.png');
+        margin: auto;
+        overflow: hidden;
+    }
+
+    #block {
+        width: 50px;
+        height: 500px;
+        background-color: green;
+        position: relative;
+        left: 400px;
+        animation: block 4s infinite linear;
+    }
+
+    @keyframes block {
+        0% {
+            left: 400px
+        }
+
+        100% {
+            left: -500px
+        }
+    }
+
+    #hole {
+        width: 50px;
+        height: 150px;
+        background-image: url('background2.png');
+        position: relative;
+        left: 400px;
+        top: -500px;
+        animation: block 4s infinite linear;
+
+    }
+
+    #character {
+        width: 50px;
+        height: 50px;
+        background-image: url('flappybird.png');
+        position: absolute;
+        top: 100px;
+        border-radius: 50px;
+    }
+
+    #score {
+        position: absolute;
+        border: 10px solid red;
+        top: 50px;
+        left: 800px;
+        background-color: white;
+        padding: 10px;
+        font-size: 30px;
+        font-family: Arial;
+    }
+    div#Score-text {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            top: 15px;
+            left: 790px;
+            color: black;
+            font-size: 25PX;
+            text-align: center;
+            position: absolute;
+
+        }
+</style>
+
+<body>
+    <div id='game'>
+        <div id="block"></div>
+        <div id="hole"></div>
+        <div id="character"></div>
+
+    </div>
+    <div id = "Score-text">SCORE:</div>
+    <div id="score">0</div>
+    <script>
+        var block = document.getElementById("block");
+        var hole = document.getElementById("hole");
+        var character = document.getElementById("character");
+        var jumping = 0;
+        var counter = 0;
+
+        hole.addEventListener('animationiteration', () => {
+            var random = -((Math.random() * 300) + 150);
+            hole.style.top = random + "px";
+            document.getElementById('score').innerHTML = counter++;
+            var point = new Audio("point.mp3");
+			point.play();
+        });
+
+        setInterval(function () {
+            var characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
+            if (jumping == 0) {
+                character.style.top = (characterTop + 3) + "px";
+            }
+            var blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+            var holeTop = parseInt(window.getComputedStyle(hole).getPropertyValue("top"));
+            var cTop = -(500 - characterTop);
+            if ((characterTop > 480) || ((blockLeft < 20) && (blockLeft > -50) && ((cTop < holeTop) || (cTop > holeTop + 130)))) {
+               
+                document.getElementById('score').innerHTML = counter;
+                
+                alert("Game over.");
+                character.style.top = 100 + "px";
+                counter = 0;
+            }
+        }, 10);
+
+        function jump() {
+            jumping = 1;
+            let jumpCount = 0;
+            var jumpInterval = setInterval(function () {
+                var characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
+                if ((characterTop > 6) && (jumpCount < 15)) {
+                    character.style.top = (characterTop - 5) + "px";
+                }
+                if (jumpCount > 20) {
+                    clearInterval(jumpInterval);
+                    jumping = 0;
+                    jumpCount = 0;
+                }
+                jumpCount++;
+            }, 10);
+        }
+        document.onkeydown = function (e) {
+            console.log(e);
+            if (e.keyCode == 37) {
+                jump();
+            }
+        }
+    </script>
+</body>
+
+</html>
