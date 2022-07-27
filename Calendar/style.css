@@ -1,0 +1,57 @@
+
+#Whole{
+    /* background-image: url('calendar.PNG'); */
+    display: inline-block;
+    height: auto;
+    width: auto;
+    padding: 50px;
+    /* background-color: aquamarine; */
+    background-position: center;
+}
+
+#sun,#mon,#tue,#wed,#thu,#fri,#sat{
+    width: 70px;
+    height: 30px;
+    border: 3px solid black;
+    display: inline-block;
+    margin-bottom: 5px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+} 
+#empty{
+    background-color: gray;
+    width: 70px;
+    height: 30px;
+    border: 3px solid gray;
+    display: inline-block;
+    margin-bottom: 5px;
+    color: gray;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+} 
+#sun{
+    background-color: skyblue;
+}
+#sat{
+    background-color: rgb(169, 189, 135);
+}
+#june{
+    width: 204px;
+    height: 104px;
+    /* background-color: blue; */
+    display: inline-block;
+    background-image: url('june2021-3.png');
+}
+#aug{
+    width: 204px;
+    height: 104px;
+    /* background-color: blue; */
+    display: inline-block;
+    margin-left: 150px;
+    background-image: url('aug2021-2.png');
+}
+h1{
+    text-align: center;
+}
+
